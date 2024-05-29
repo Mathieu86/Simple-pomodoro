@@ -6,9 +6,9 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
-SHORT_BREAK_MIN = 1
-LONG_BREAK_MIN = 1
+WORK_MIN = 20
+SHORT_BREAK_MIN = 10
+LONG_BREAK_MIN = 30
 reps = 1
 timer_label = ''
 timer_total_time = 0
@@ -19,6 +19,9 @@ working = False
 
 # bugs
 # bug when pausing on a changeover
+# "still working" button that (1) reverts to working rep without loosing timing,
+# and (2) adds the used break time to the working time,
+# and (3) adds the extra working time to the later break time? Or a portion of it?
 
 # --------------------------- START/PAUSE THE WHOLE COUNTDOWN --------
 
@@ -95,7 +98,7 @@ def countdown(counter):
         global timer_label, paused
         if not paused:
             canvas.itemconfig(countdown_text, text=f"{minutes:02}:{seconds:02}")
-            timer_label = window.after(200, countdown, counter - 1)
+            timer_label = window.after(1000, countdown, counter - 1)
 
             total_hours = timer_total_time // 3600
             total_minutes = (timer_total_time % 3600) // 60
